@@ -1,5 +1,5 @@
 /*!
-*  angular-leaflet-directive  2015-11-06
+*  angular-leaflet-directive 0.10.1 2017-04-25
 *  angular-leaflet-directive - An AngularJS directive to easily interact with Leaflet maps
 *  git: https://github.com/tombatossals/angular-leaflet-directive
 */
@@ -463,7 +463,7 @@ angular.module('leaflet-directive').service('leafletData', ["$log", "$q", "leafl
       'geoJSON',
       'UTFGrid', //odd ball on naming convention keeping to not break
       'decorations',
-      'directiveControls',];
+      'directiveControls', ];
 
   //init
   _privateItems.forEach(function(itemName) {
@@ -3826,8 +3826,7 @@ angular.module('leaflet-directive')
           _remove(leafletGeoJSON);
         };
 
-        var _addGeojson = function(model, maybeName) {
-          var geojson = angular.copy(model);
+        var _addGeojson = function(geojson, maybeName) {
           if (!(isDefined(geojson) && isDefined(geojson.data))) {
             return;
           }
@@ -4671,7 +4670,7 @@ angular.module('leaflet-directive').directive('markers',
             listenMarkerEvents(marker, model, leafletScope, watchOptions.individual.doWatch, map);
             leafletMarkerEvents.bindEvents(mapId, marker, pathToMarker, model, leafletScope, layerName);
           }          else {
-            var oldModel = isDefined(oldModel) ? oldModels[newName] : undefined;
+            var oldModel = isDefined(oldModels) ? oldModels[newName] : undefined;
             updateMarker(model, oldModel, maybeLMarker, pathToMarker, leafletScope, layers, map);
           }
         }
@@ -4767,7 +4766,7 @@ angular.module('leaflet-directive').directive('markers',
               var _clean = function(models, oldModels) {
                 if (isNested) {
                   $it.each(models, function(markerToMaybeDel, layerName) {
-                    var oldModel = isDefined(oldModel) ? oldModels[layerName] : undefined;
+                    var oldModel = isDefined(oldModels) ? oldModels[layerName] : undefined;
                     _destroy(markerToMaybeDel, oldModel, leafletMarkers[layerName], map, layers);
                   });
 
@@ -4782,7 +4781,7 @@ angular.module('leaflet-directive').directive('markers',
                 var skips = null;
                 if (isNested) {
                   $it.each(models, function(markersToAdd, layerName) {
-                    var oldModel = isDefined(oldModel) ? oldModels[layerName] : undefined;
+                    var oldModel = isDefined(oldModels) ? oldModels[layerName] : undefined;
                     skips = _getNewModelsToSkipp(models[layerName], oldModel, leafletMarkers[layerName]);
                     _addMarkers(attrs.id, markersToAdd, oldModels, map, layers, leafletMarkers, leafletScope,
                         watchOptions, layerName, skips);
@@ -5118,7 +5117,7 @@ angular.module('leaflet-directive').directive('tiles', ["$log", "leafletData", "
               });
             },
           };
-        },]);
+        }, ]);
 });
 
 angular.module('leaflet-directive')
